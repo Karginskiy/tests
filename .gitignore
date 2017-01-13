@@ -45,3 +45,16 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+.idea/workspace.xml
+.idea/uiDesigner.xml
+.idea/misc.xml
+.idea/copyright/profiles_settings.xml
+.idea/libraries/Maven__junit_junit_4_12.xml
+.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_21.xml
+.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml
+.idea/modules.xml
+.idea/compiler.xml
+tests.iml
+target/test-classes/IpAddressRangePrinterTest.class
+target/classes/IpAddressRangePrinter.class
+.idea/vcs.xml
