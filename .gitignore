@@ -59,3 +59,7 @@ target/test-classes/IpAddressRangePrinterTest.class
 target/classes/IpAddressRangePrinter.class
 .idea/vcs.xml
 *.class
+/target/
+.idea/libraries/Maven__org_apache_maven_surefire_surefire_api_2_19_1.xml
+.idea/encodings.xml
+.idea/libraries/Maven__org_apache_maven_surefire_surefire_junit4_2_19_1.xml
