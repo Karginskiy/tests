@@ -1,4 +1,5 @@
 import exceptions.InvalidIpAddressException;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -20,6 +21,11 @@ public class IpAddressRangeIteratorTest {
         } catch (InvalidIpAddressException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @After
+    public void clearIterator() {
+        iterator = null;
     }
 
     @Test

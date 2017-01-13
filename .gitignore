@@ -58,3 +58,4 @@ tests.iml
 target/test-classes/IpAddressRangePrinterTest.class
 target/classes/IpAddressRangePrinter.class
 .idea/vcs.xml
+*.class
