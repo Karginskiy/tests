@@ -5,19 +5,19 @@ import java.util.NoSuchElementException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class IpAddress {
+class IpAddress {
 
     private String strValue;
     private int[] intValues = new int[4];
     private final String ipRegexPattern = "^(2[0-4]\\d|[01]?\\d\\d?|25[0-5])" +
             "\\.(2[0-4]\\d|[01]?\\d\\d?|25[0-5])" +
             "\\.(2[0-4]\\d|[01]?\\d\\d?|25[0-5])" +
-            "\\.(2[0-4]\\d|[01]?\\d\\d?|25[0-5])";
+            "\\.(2[0-4]\\d|[01]?\\d\\d?|25[0-5])$";
 
-    public IpAddress(String ip) throws InvalidIpAddressException {
+    IpAddress(String ip) throws InvalidIpAddressException {
         if (!validateIp(ip)) throw new InvalidIpAddressException();
         this.strValue = ip;
-        parseStringValue();
+        parseStringValue(ip);
     }
 
     @Override
@@ -36,37 +36,18 @@ public class IpAddress {
     }
 
     /*
-            Default constructor for reflective instantiation in test classes.
-         */
+        Default constructor for reflective instantiation in test classes.
+    */
     public IpAddress() {}
 
     public void setStrValue(String strValue) throws InvalidIpAddressException {
         if (!validateIp(strValue)) throw new InvalidIpAddressException();
         this.strValue = strValue;
-        parseStringValue();
+        parseStringValue(strValue);
     }
 
     public String getStrValue() {
         return strValue;
-    }
-
-    private int[] getIntValues() {
-        return intValues;
-    }
-
-    private void parseStringValue() {
-        Pattern pattern = Pattern.compile(ipRegexPattern);
-        Matcher matcher = pattern.matcher(this.strValue);
-        while (matcher.find()) {
-            intValues[0] = Integer.parseInt(matcher.group(1));
-            intValues[1] = Integer.parseInt(matcher.group(2));
-            intValues[2] = Integer.parseInt(matcher.group(3));
-            intValues[3] = Integer.parseInt(matcher.group(4));
-        }
-    }
-
-    private boolean validateIp(String ip) {
-        return ip.matches(ipRegexPattern);
     }
 
     @Override
@@ -74,8 +55,29 @@ public class IpAddress {
         return strValue;
     }
 
-    public IpAddressRangeIterator rangeIterator(IpAddress toIp) {
+    IpAddressRangeIterator rangeIterator(IpAddress toIp) {
         return new IpAddressRangeIterator(toIp);
+    }
+
+    private int[] getIntValues() {
+        return intValues;
+    }
+
+    private int[] parseStringValue(String strValue) {
+        int[] ints = new int[4];
+        Pattern pattern = Pattern.compile(ipRegexPattern);
+        Matcher matcher = pattern.matcher(strValue);
+        while (matcher.find()) {
+            ints[0] = Integer.parseInt(matcher.group(1));
+            ints[1] = Integer.parseInt(matcher.group(2));
+            ints[2] = Integer.parseInt(matcher.group(3));
+            ints[3] = Integer.parseInt(matcher.group(4));
+        }
+        return ints;
+    }
+
+    private boolean validateIp(String ip) {
+        return ip.matches(ipRegexPattern);
     }
 
     private class IpAddressRangeIterator implements Iterator<IpAddress> {
