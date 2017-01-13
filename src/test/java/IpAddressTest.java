@@ -1,3 +1,4 @@
+import exceptions.InvalidIpAddressException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,6 +58,17 @@ public class IpAddressTest {
         }
 
         logger.info("IpAddress.validateId() is ok!");
+    }
+
+    @Test
+    public void parseStringValueTest() throws InvalidIpAddressException, ReflectiveOperationException {
+        Method method = IpAddress.class.getDeclaredMethod("parseStringValue", String.class);
+        method.setAccessible(true);
+        assertArrayEquals((int[]) method.invoke(IpAddress.class.newInstance(), "127.0.0.1"),
+                new int[] {127, 0, 0, 1});
+
+        assertArrayEquals((int[]) method.invoke(IpAddress.class.newInstance(), "255.255.255.255"),
+                new int[] {255, 255, 255, 255});
     }
 
 }
